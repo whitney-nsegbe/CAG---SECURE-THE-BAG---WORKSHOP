@@ -1,0 +1,352 @@
+/* =========================================================
+   SECURE THE BAG - STYLESHEET
+   This file controls how everything LOOKS.
+   It does not control how anything WORKS - that is script.js.
+   ========================================================= */
+
+/* -----------------------------------------------------------
+   COLORS
+   We store our colors here as "variables" so we only have to
+   change a color once and it updates everywhere it is used.
+   Try changing one of these hex codes and see what happens!
+   ----------------------------------------------------------- */
+:root{
+  --plum: #201533;          /* main background color */
+  --plum-deep: #150d24;     /* darker background, used on buttons/text */
+  --pink: #ff5fa8;          /* main accent color */
+  --lime: #c6f24e;          /* second accent color */
+  --lilac: #a98cf7;         /* third accent color */
+  --cream: #f7f3ff;         /* main text color */
+  --text-dim: rgba(247,243,255,0.62);   /* lighter text, for labels */
+  --text-dimmer: rgba(247,243,255,0.42); /* even lighter text */
+  --panel: rgba(255,255,255,0.045);      /* background for cards/boxes */
+  --panel-border: rgba(255,255,255,0.10); /* border color for cards/boxes */
+  --input-bg: rgba(0,0,0,0.22);          /* background inside input boxes */
+  --radius: 18px;    /* how rounded big boxes are */
+  --radius-sm: 12px; /* how rounded small boxes/buttons are */
+}
+
+/* This makes sizing math easier - padding and borders are
+   included inside the width/height instead of adding to it. */
+*{ box-sizing: border-box; }
+
+/* -----------------------------------------------------------
+   PAGE BACKGROUND AND BASE TEXT
+   ----------------------------------------------------------- */
+body{
+  margin: 0;
+  min-height: 100vh;
+  /* the glowy blobs of color in the background (the "ombre" look) */
+  background:
+    radial-gradient(circle at 15% 8%, rgba(255,95,168,0.22), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(169,140,247,0.22), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(198,242,78,0.09), transparent 50%),
+    var(--plum);
+  color: var(--cream);
+  font-family: 'Inter', sans-serif;
+  padding: 28px 16px 70px;
+  line-height: 1.4;
+}
+
+/* headings use the bubbly Fredoka font, everything else uses Inter */
+h1, h2, h3, h4, .display{ font-family: 'Fredoka', sans-serif; letter-spacing: 0.1px; }
+/* .mono is used for numbers/money so they look like a receipt */
+.mono{ font-family: 'Space Mono', monospace; }
+
+/* -----------------------------------------------------------
+   HEADER (the title at the top of the page)
+   ----------------------------------------------------------- */
+header{ max-width: 720px; margin: 0 auto 26px; text-align: center; }
+header h1{ font-size: clamp(28px, 7vw, 44px); margin: 0 0 6px; }
+header h1 span{ color: var(--pink); }
+header p{ color: var(--text-dim); margin: 0; font-size: 14px; }
+
+.wrap{ max-width: 720px; margin: 0 auto; }
+
+/* -----------------------------------------------------------
+   SHARED "PANEL" LOOK
+   The instructions box, the add-goal form, and every goal card
+   all share this same frosted-glass box style.
+   ----------------------------------------------------------- */
+.how-to, form.add-goal, .card{
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+}
+
+/* -----------------------------------------------------------
+   "HOW THIS WORKS" INSTRUCTIONS BOX
+   ----------------------------------------------------------- */
+.how-to{ padding: 16px 18px; margin-bottom: 18px; }
+.how-to summary{
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.how-to summary::-webkit-details-marker{ display: none; } /* hides default arrow */
+.how-to summary::before{
+  content: "\25B8"; /* a small triangle/arrow shape */
+  color: var(--lime);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.how-to[open] summary::before{ transform: rotate(90deg); } /* arrow rotates when opened */
+.how-to ol{ margin: 12px 0 0; padding-left: 18px; font-size: 13.5px; line-height: 1.65; color: rgba(247,243,255,0.82); }
+.how-to ol li{ margin-bottom: 6px; }
+.how-to ol li b{ color: var(--cream); }
+
+/* -----------------------------------------------------------
+   ADD GOAL FORM
+   ----------------------------------------------------------- */
+form.add-goal{
+  padding: 18px;
+  margin-bottom: 24px;
+  display: grid;
+  /* this makes the form fields automatically wrap onto new rows
+     on small screens - try resizing the browser window! */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+form.add-goal .field{ display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+form.add-goal .field.full{ grid-column: 1 / -1; } /* makes this field take the full width */
+form.add-goal label{ font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim); }
+form.add-goal input, form.add-goal select{
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--cream);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+/* shows a soft purple outline when you click into a text box - helps with accessibility */
+form.add-goal input:focus, form.add-goal select:focus, .log-row input:focus, .extra-panel input:focus{
+  outline: 2px solid var(--lilac);
+  outline-offset: 1px;
+}
+form.add-goal input[type="file"]{ padding: 7px; font-size: 12px; }
+form.add-goal .submit-row{ grid-column: 1 / -1; margin-top: 2px; }
+
+/* custom look for the "monetary / general" dropdown, so it does
+   not look like a plain default browser dropdown */
+.select-wrap{ position: relative; }
+.select-wrap select{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 34px;
+  cursor: pointer;
+}
+.select-wrap i{
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--text-dim);
+  pointer-events: none; /* lets clicks pass through the icon to the dropdown */
+}
+.select-wrap select option{ background: var(--plum-deep); color: var(--cream); }
+
+/* -----------------------------------------------------------
+   BUTTONS
+   ----------------------------------------------------------- */
+.btn{
+  border: none;
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  border-radius: 999px; /* very rounded = pill shape */
+  padding: 11px 22px;
+  font-size: 14px;
+  background: var(--pink);
+  color: var(--plum-deep);
+  transition: transform 0.12s ease, background 0.15s ease, opacity 0.15s ease;
+  width: 100%;
+}
+.btn:hover{ transform: translateY(-1px); opacity: 0.92; }
+.btn:active{ transform: translateY(0); }
+/* "ghost" buttons are the outlined, less important buttons */
+.btn.ghost{
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--cream);
+  width: auto;
+}
+.btn.ghost:hover{ border-color: var(--lilac); }
+.btn.small{ padding: 8px 16px; font-size: 12.5px; width: auto; }
+
+/* -----------------------------------------------------------
+   GOAL CARDS GRID
+   ----------------------------------------------------------- */
+#goals{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card{
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+  background-size: cover;
+  background-position: center;
+}
+/* this dark overlay only shows up when a card has a background
+   photo, so the text stays readable no matter what image is used */
+.card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.card.has-image::before{
+  background: linear-gradient(180deg, rgba(21,13,36,0.82), rgba(21,13,36,0.95) 45%, rgba(21,13,36,0.98));
+}
+.card > *{ position: relative; z-index: 1; }
+
+.card-top{ display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+.card-top h3{ margin: 0; font-size: 18px; word-break: break-word; }
+.tag{ font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim); margin-top: 2px; }
+.card-top-right{ display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.streak{
+  font-family: 'Space Mono', monospace;
+  font-size: 11.5px;
+  background: rgba(198,242,78,0.13);
+  color: var(--lime);
+  border: 1px solid rgba(198,242,78,0.3);
+  padding: 4px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* -----------------------------------------------------------
+   SAVINGS JAR (the little SVG picture that fills up)
+   ----------------------------------------------------------- */
+.jar-row{ display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
+.jar{ width: 52px; height: 68px; flex-shrink: 0; }
+.jar-outline{ fill: none; stroke: rgba(247,243,255,0.45); stroke-width: 3; }
+/* this transition makes the liquid inside the jar animate smoothly
+   whenever the fill amount changes */
+.jar-liquid{ transition: y 0.6s ease, height 0.6s ease; }
+
+.amounts{ flex: 1; min-width: 0; }
+.amounts .current{ font-family: 'Space Mono', monospace; font-size: 21px; font-weight: 700; }
+.amounts .target{ font-size: 11.5px; color: var(--text-dim); font-family: 'Space Mono', monospace; margin-top: 2px; }
+.bar-track{ height: 7px; border-radius: 999px; background: rgba(255,255,255,0.10); overflow: hidden; margin-top: 8px; }
+.bar-fill{ height: 100%; background: linear-gradient(90deg, var(--pink), var(--lime)); transition: width 0.6s ease; }
+
+/* -----------------------------------------------------------
+   LOG PROGRESS ROW
+   ----------------------------------------------------------- */
+.log-row{ display: flex; gap: 8px; margin-bottom: 12px; }
+.log-row input{
+  flex: 1;
+  min-width: 0;
+  background: var(--input-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--cream);
+  padding: 9px 11px;
+  border-radius: var(--radius-sm);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+}
+.log-row .btn{ width: auto; flex-shrink: 0; }
+
+/* -----------------------------------------------------------
+   MONEY GOAL EXTRAS (shifts calculator + spending log)
+   ----------------------------------------------------------- */
+.extras{ margin-top: 4px; padding-top: 12px; border-top: 1px solid var(--panel-border); }
+.extra-panel{ display: none; font-size: 13px; margin-top: 10px; }
+.extra-panel.open{ display: block; } /* JavaScript adds/removes this "open" class */
+.extra-panel .row{ display: flex; gap: 8px; margin-bottom: 8px; }
+.extra-panel input{
+  flex: 1;
+  min-width: 0;
+  background: var(--input-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--cream);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+}
+.extra-result{ font-family: 'Space Mono', monospace; color: var(--lime); font-size: 12.5px; margin-top: 2px; }
+
+.spend-section{ margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--panel-border); }
+.spend-section h4{ margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-dim); font-family: 'Inter', sans-serif; font-weight: 600; }
+.spend-total{ font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--lime); margin-bottom: 10px; }
+.spend-log-list{ list-style: none; padding: 0; margin: 10px 0 0; max-height: 110px; overflow-y: auto; font-family: 'Space Mono', monospace; font-size: 12px; }
+.spend-log-list li{ display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.spend-log-list .item{ color: rgba(247,243,255,0.8); }
+.spend-log-list .amt{ color: var(--lime); flex-shrink: 0; }
+.spend-log-empty{ font-size: 12px; color: var(--text-dimmer); padding: 4px 0; }
+
+/* -----------------------------------------------------------
+   DELETE BUTTON
+   ----------------------------------------------------------- */
+.delete-x{
+  background: none;
+  border: none;
+  color: var(--text-dimmer);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px;
+}
+.delete-x:hover{ color: var(--pink); }
+
+/* -----------------------------------------------------------
+   CELEBRATION POP-UP (the toast message)
+   It lives off-screen at the bottom until JavaScript adds the
+   "show" class, then it slides up into view.
+   ----------------------------------------------------------- */
+.toast{
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(200%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: var(--lime);
+  color: var(--plum-deep);
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  transition: transform 0.4s cubic-bezier(.2,1.2,.4,1), opacity 0.3s ease, visibility 0.3s;
+  z-index: 50;
+  font-size: 14px;
+  text-align: center;
+  max-width: 90vw;
+}
+.toast.show{
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* -----------------------------------------------------------
+   EMPTY STATE (shown when there are no goals yet)
+   ----------------------------------------------------------- */
+.empty{ text-align: center; padding: 40px 20px; color: var(--text-dimmer); font-size: 14px; }
+
+/* -----------------------------------------------------------
+   RESPONSIVE - adjusts the layout on small phone screens
+   ----------------------------------------------------------- */
+@media (max-width: 480px){
+  body{ padding: 20px 12px 60px; }
+  .card-top{ flex-wrap: wrap; }
+  .jar-row{ gap: 10px; }
+  .log-row{ flex-wrap: wrap; }
+  .log-row .btn{ width: 100%; }
+}

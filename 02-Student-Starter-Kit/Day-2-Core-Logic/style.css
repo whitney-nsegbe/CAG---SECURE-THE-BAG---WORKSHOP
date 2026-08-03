@@ -1,0 +1,301 @@
+/* =========================================================
+   SECURE THE BAG - STYLESHEET (Day 1 starter)
+   This file controls how everything LOOKS.
+
+   Look for these two kinds of banners as you scroll:
+
+   ### IGNORE THIS PART ###
+   already-written styling. We'll walk through what it does in
+   class, but you are not writing or editing it.
+
+   ### YOUR TURN - WRITE CODE HERE ###
+   this is where you write CSS yourself, guided by a
+   description of the goal instead of the exact code.
+   ========================================================= */
+
+/* ###########################################################
+   IGNORE THIS PART
+   Colors, a sizing reset, and the page background/header. This
+   is setup we're giving you so everyone starts from the same
+   base - we'll cover what :root and box-sizing do in class.
+   ########################################################### */
+
+:root {
+  --plum: #201533;
+  /* main background color */
+  --plum-deep: #150d24;
+  /* darker background, used on buttons/text */
+  --pink: #ff5fa8;
+  /* main accent color */
+  --lime: #c6f24e;
+  /* second accent color */
+  --lilac: #a98cf7;
+  /* third accent color */
+  --cream: #f7f3ff;
+  /* main text color */
+  --text-dim: rgba(247, 243, 255, 0.62);
+  --text-dimmer: rgba(247, 243, 255, 0.42);
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-border: rgba(255, 255, 255, 0.10);
+  --input-bg: rgba(0, 0, 0, 0.22);
+  --radius: 18px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(255, 95, 168, 0.22), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(169, 140, 247, 0.22), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(198, 242, 78, 0.09), transparent 50%),
+    var(--plum);
+  color: var(--cream);
+  font-family: 'Inter', sans-serif;
+  padding: 28px 16px 70px;
+  line-height: 1.4;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Fredoka', sans-serif;
+  letter-spacing: 0.1px;
+}
+
+.mono {
+  font-family: 'Space Mono', monospace;
+}
+
+header {
+  max-width: 720px;
+  margin: 0 auto 26px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: clamp(28px, 7vw, 44px);
+  margin: 0 0 6px;
+}
+
+header h1 span {
+  color: var(--pink);
+}
+
+header p {
+  color: var(--text-dim);
+  margin: 0;
+  font-size: 14px;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ########################################################### */
+
+
+/* =============================================================
+   YOUR TURN - WRITE CODE HERE (TODO SECTION 1)
+   THE INSTRUCTIONS BOX (.how-to)
+
+   Right now this box is just plain text sitting on the page -
+   no background, no border, no breathing room around the text.
+
+   What we want it to look like: a soft rounded card that stands
+   out gently from the page, with the text not squished right up
+   against the edges.
+
+   Think about it:
+   - which property controls the color BEHIND an element?
+   - which property makes corners round instead of sharp?
+   - which property adds space INSIDE a box, between its edge
+     and its content?
+   - we already have colors defined for you at the top of this
+     file, in :root - which of those would fit a card like this?
+
+   Not sure where to start? Ask your AI: "how do I give an
+   element a background color and rounded corners in CSS?"
+   ============================================================= */
+.how-to {
+  margin-bottom: 18px;
+}
+
+/* ============================================================= */
+
+
+/* ###########################################################
+   IGNORE THIS PART
+   These already lay out the fields inside the form (label
+   sizing, input styling). What's missing is the form BOX
+   itself - that's the TODO right below this.
+   ########################################################### */
+form.add-goal .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+form.add-goal label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+
+form.add-goal input,
+form.add-goal select {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--panel-border);
+  color: var(--cream);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+/* ########################################################### */
+
+/* =============================================================
+   YOUR TURN - WRITE CODE HERE (TODO SECTION 2)
+   THE ADD GOAL FORM BOX (.add-goal)
+
+   This is the box with the goal name, target, type, and icon
+   inputs. Right now it just looks like plain stacked text boxes.
+
+   What we want it to look like: styled the same way as the
+   instructions box above (same background idea, same rounded
+   corners, same padding), but with the fields arranged in a
+   neat row instead of stacked one on top of the other.
+
+   Think about it:
+   - what did you just use to style the instructions box? does
+     the same approach apply here?
+   - there's a CSS layout system that arranges things into rows
+     and columns automatically - what is it called, and how do
+     you turn it on for an element?
+
+   Not sure where to start? Ask your AI: "how do I arrange a
+   group of form fields into a row using CSS grid?"
+   ============================================================= */
+form.add-goal {
+  margin-bottom: 24px;
+}
+
+/* ============================================================= */
+
+
+/* =============================================================
+   YOUR TURN - WRITE CODE HERE (TODO SECTION 3)
+   BUTTONS (.btn)
+
+   Every button in the app uses this class. Right now it has no
+   color, no shape, and doesn't even look clickable.
+
+   What we want it to look like: a solid pill-shaped button
+   (fully rounded ends, like a capsule) in one of our accent
+   colors, with the cursor changing to a hand when you hover
+   over it, so it visually reads as "click me."
+
+   Think about it:
+   - based on what you used in TODO 1 and 2, which property
+     sets the background color?
+   - what value would border-radius need to be for the ends to
+     become fully round instead of just rounded corners? (hint:
+     a very large number stops mattering once it's bigger than
+     half the button's height)
+   - which property changes what the mouse cursor looks like on
+     hover?
+
+   Not sure where to start? Ask your AI: "how do I make a
+   pill-shaped button in CSS, and how do I change the cursor on
+   hover?"
+   ============================================================= */
+.btn {
+  border: none;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ============================================================= */
+
+
+/* =============================================================
+   YOUR TURN - WRITE CODE HERE (TODO SECTION 4)
+   GOAL CARDS (.card)
+
+   Tomorrow (Day 2) we will write the JavaScript that actually
+   creates goal cards on the screen. Let's style what they will
+   look like now, so they're ready to go.
+
+   What we want it to look like: the same card treatment as the
+   instructions box and the form (background, rounded corners,
+   padding) - cards should feel like they're part of the same
+   family of boxes.
+
+   Think about it:
+   - which properties are you repeating for the third time now?
+     (that's usually a sign you could ask your AI to explain how
+     to keep styles consistent, but for now, just repeat what
+     worked before)
+   ============================================================= */
+.card {}
+
+/* ============================================================= */
+
+
+/* ###########################################################
+   IGNORE THIS PART
+   Card text layout, the grid that arranges multiple cards side
+   by side, the empty-state message, and a small phone-screen
+   adjustment. All already done.
+   ########################################################### */
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.card-top h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+#goals {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-dimmer);
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px 60px;
+  }
+}
+
+/* ########################################################### */

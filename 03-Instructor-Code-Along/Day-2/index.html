@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>secure the bag.</title>
+
+<!-- These lines load the fonts and icons we use in the app.
+     They need an internet connection to work. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- This connects our own stylesheet file, where all the colors
+     and layout rules live. -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header>
+  <h1>secure <span>the</span> bag.</h1>
+  <p>set the goal. log the bag. watch the jar fill up.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- ===================== INSTRUCTIONS ===================== -->
+  <!-- <details> and <summary> create a box that opens and closes
+       when you click it - no JavaScript needed for that part! -->
+  <details class="how-to">
+    <summary>how this works</summary>
+    <ol>
+      <li><b>add a goal</b> - give it a name, a target amount, and pick monetary (for money goals) or general (for anything else you are working toward). optional: upload a picture for the card.</li>
+      <li><b>log your progress</b> - every time you save or earn money (or make progress), type the amount in the "log it" box on your goal's card. the jar fills up and your progress bar updates.</li>
+      <li><b>watch for celebrations</b> - you get a pop-up message when you hit 25%, 50%, 75%, and 100% of your goal.</li>
+      <li><b>build your streak</b> - log progress on consecutive days to build your streak (shown top-right of each card). skip a day and it resets.</li>
+      <li><b>for money goals only:</b> use "how many shifts left?" to see how many more shifts you need at your pay rate, and log things you skipped buying (like coffee) in the "what you're skipping" section to see how much that adds up to.</li>
+      <li><b>delete a goal</b> anytime with the trash icon in the top-right of its card.</li>
+    </ol>
+  </details>
+
+  <!-- ===================== ADD GOAL FORM ===================== -->
+  <form class="add-goal" id="addGoalForm">
+    <div class="field full">
+      <label for="goalName">goal name</label>
+      <input type="text" id="goalName" placeholder="concert tickets" required>
+    </div>
+    <div class="field">
+      <label for="goalTarget">target</label>
+      <input type="number" id="goalTarget" placeholder="150" min="1" required>
+    </div>
+    <div class="field">
+      <label for="goalType">type</label>
+      <div class="select-wrap">
+        <select id="goalType">
+          <option value="monetary">monetary</option>
+          <option value="general">general</option>
+        </select>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </div>
+    <div class="field full">
+      <label for="goalImage">card image (optional)</label>
+      <input type="file" id="goalImage" accept="image/*">
+    </div>
+    <div class="submit-row">
+      <button type="submit" class="btn"><i class="fa-solid fa-plus"></i> add goal</button>
+    </div>
+  </form>
+
+  <!-- Goal cards get added inside this empty div by script.js -->
+  <div id="goals"></div>
+
+  <!-- This message only shows when there are zero goals.
+       script.js hides/shows it automatically. -->
+  <div class="empty" id="emptyState">no goals yet - add your first one above</div>
+</div>
+
+<!-- This is the pop-up message that slides up from the bottom
+     when you hit a milestone. It starts empty and hidden. -->
+<div class="toast" id="toast"></div>
+
+<!-- This connects our JavaScript file, where all the app's
+     LOGIC lives (what happens when you click buttons, etc). -->
+<script src="script.js"></script>
+</body>
+</html>
