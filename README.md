@@ -35,7 +35,7 @@ have a working reference while live-coding with the class:
 - **Day-3** - fully working core plus all 5 features completed
 - **Day-4** - the final combined app (same as 01-Complete-App)
 
-### 04-Slide-Decks
+### 04-Slide-Decks (still working on them)
 A short slideshow for each day (10-15 minutes of teaching content),
 covering just the concepts that day's lesson needs, with quick
 quizzes to check understanding before hands-on time starts:
