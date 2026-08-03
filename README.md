@@ -28,7 +28,7 @@ Each day's folder is the STARTING point for that morning. Hand out
 the next day's folder once a day wraps.
 
 ### 03-Instructor-Code-Along
-Your answer keys, matching the same day structure, so you always
+My answer keys, matching the same day structure, so I always
 have a working reference while live-coding with the class:
 - **Day-1** - fully styled app, no JS yet
 - **Day-2** - fully styled app with the core logic completed
@@ -45,8 +45,7 @@ quizzes to check understanding before hands-on time starts:
 - **Day-4-Final-Assembly.pptx** - combining everything and presenting
 
 ## How the groups work
-Pairs of 2 per laptop. One girl codes, the other uses Claude to
-research/troubleshoot, and they swap roles as needed. On Day 3,
-each pair is assigned one feature file and works independently -
+Students use vscode + Copilot. 
+On Day 3, each pair is assigned one feature file and works independently -
 since every feature lives in its own file, there's nothing to
 merge and no risk of two people editing the same lines.
